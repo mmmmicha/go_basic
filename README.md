@@ -42,14 +42,17 @@
 - 사이즈
 
 ### int : 4/8byte --> 컴퓨터 사양이 4/8 인지에 따라 기본형이 정해짐
-- int32 : 4byte
+- int32 : 4byte > 0 ~ 42억
+- uint32 : 4byte > -21억 ~ 21억
 - int64 : 8byte
-- int8 : 1byte
-- int16 : 2byte
+- int8 : 1byte > -128 ~ 127
+- uint8 : 1byte > 0 ~ 255
+- int16 : 2byte > -32768 ~ 32767
+- uint16 : 2byte > 0 ~ 65535 
 
-### float
-- float32
-- float64
+### float(정밀도가 관건)
+- float32 : 4byte > 숫자부분 7개
+- float64 : 8byte > 숫자부분 15개
 
 ### bool(boolean) 
 - 사이즈 x
@@ -58,3 +61,13 @@
 - 문자열
 - 사이즈 x
 - 사이즈는 값에 결정됨
+
+
+### 연산자(operator)
+- link : golang.org/ref/spec#Operator
+- 산술 
+  - +, -, x, /
+- 비트
+  - &(and), |(or), ^(xor)
+  - ^ 의 경우 이항연산자일 때는 xor, 단항연산자일때는 not
+- 논리
