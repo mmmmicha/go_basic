@@ -17,7 +17,9 @@ func main() {
 		temp[i] = arr[len(arr)-1-i]
 	}
 	fmt.Println(clone)
+	//	[1 2 3 4 5]
 	fmt.Println(temp)
+	//	[5 4 3 2 1]
 
 	// 방식 2
 	// go에서 가능한 이중대입
@@ -26,4 +28,5 @@ func main() {
 		arr[i], arr[len(arr)-1-i] = arr[len(arr)-1-i], arr[i]
 	}
 	fmt.Println(arr)
+	//	[5 4 3 2 1]
 }

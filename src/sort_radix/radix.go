@@ -7,6 +7,7 @@ package main
 
 import "fmt"
 
+// radix sorting
 func main() {
 	arr := [10]int{0, 5, 4, 9, 1, 2, 8, 3, 6, 4}
 	// 참고
@@ -30,4 +31,5 @@ func main() {
 	}
 
 	fmt.Println(arr)
+	//	[0 1 2 3 4 4 5 6 8 9]
 }

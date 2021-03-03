@@ -7,12 +7,12 @@ import (
 func main() {
 	s := "Hello World"
 	s = "Hello 월드"
-	// H, e, l, l, o,  , ì, , , ë, , ,
 	// 인코딩 한글 3byte
 
 	for i := 0; i < len(s); i++ {
 		fmt.Print(string(s[i]), ", ")
 	}
+	// H, e, l, l, o,  , ì, , , ë, , ,
 	fmt.Println()
 	for i := 0; i < len(s); i++ {
 		fmt.Print(s[i], ", ")
