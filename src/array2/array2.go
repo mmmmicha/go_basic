@@ -8,7 +8,7 @@ func main() {
 	// 방식 1
 	arr := [5]int{1, 2, 3, 4, 5}
 	// arr := [5]{1, 2, 3, 4, 5}
-	// 이런형태는 x
+	// 이런형태는 x -> dataType을 명시해줘야함
 	clone := [5]int{}
 	temp := [len(arr)]int{}
 
