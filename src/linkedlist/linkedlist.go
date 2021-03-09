@@ -11,10 +11,101 @@ import "fmt"
 
 type Node struct {
 	next *Node
+	prev *Node
 	val  int
 }
 
+type LinkedList struct {
+	root *Node
+	tail *Node
+}
+
+func (l *LinkedList) AddNode(val int) {
+	if l.root == nil {
+		l.root = &Node{val: val}
+		l.tail = l.root
+		return
+	}
+	l.tail.next = &Node{val: val}
+	// 단순 복제이기 때문에 아래 구문은 현재 l.tail 의 pointer 를 순수하게 갖게됨
+	prev := l.tail
+	l.tail = l.tail.next
+	l.tail.prev = prev
+}
+
+func (l *LinkedList) RemoveNode(node *Node) {
+	if node == l.root {
+		l.root = node.next
+		l.root.prev = nil
+		node.next = nil
+		return
+	}
+
+	// root에서부터 지우고자 하는 node 앞까지 pointer 전진하기
+	// prev := l.root
+	// for prev.next != node {
+	// 	prev = prev.next
+	// }
+
+	prev := node.prev
+
+	// 지우고자 하는 node가 tail 인 경우
+	if node == l.tail {
+		prev.next = nil
+		l.tail.prev = nil
+		l.tail = prev
+	} else {
+		node.prev = nil
+		prev.next = prev.next.next
+		prev.next.prev = prev
+	}
+	node.next = nil
+}
+
+func (l *LinkedList) PrintNodes() {
+	node := l.root
+	for node.next != nil {
+		fmt.Printf("%d ->", node.val)
+		node = node.next
+	}
+	fmt.Printf("%d\n", node.val)
+}
+
+func (l *LinkedList) PrintReverse() {
+	node := l.tail
+	for node.prev != nil {
+		fmt.Printf("%d -> ", node.val)
+		node = node.prev
+	}
+	fmt.Printf("%d\n", node.val)
+}
+
 func main() {
+	list := &LinkedList{}
+	list.AddNode(0)
+
+	for i := 1; i < 10; i++ {
+		list.AddNode(i)
+	}
+
+	list.PrintNodes()
+	// root 바로 다음 노드 지우기
+	list.RemoveNode(list.root.next)
+
+	list.PrintNodes()
+	// root 노드 지우기
+	list.RemoveNode(list.root)
+
+	list.PrintNodes()
+	// tail 노드 지우기
+	list.RemoveNode(list.tail)
+
+	list.PrintNodes()
+
+	fmt.Println("*******************")
+	list.PrintReverse()
+	fmt.Println("*******************")
+
 	var root *Node
 	var tail *Node
 
@@ -38,6 +129,14 @@ func main() {
 	root, tail = RemoveNode(tail, root, tail)
 
 	PrintNodes(root)
+
+	// sclice vs linkedlist
+	// 이 경우 length:5, capacity:5
+	// append 를 하더라도 capacity:5 유지, length만 4로 바뀜
+	// 고로 새로운 메모리를 할당하진 않음
+	a := []int{1, 2, 3, 4, 5}
+	a = append(a[0:2], a[3:]...)
+	fmt.Println(a)
 }
 
 func PrintNodes(root *Node) {
