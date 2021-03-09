@@ -91,3 +91,18 @@
 - gc 는 멀티스레드로 작업을 한다.
   - 초창기에는 프로그램을 멈춰두고 gc가 작업을 하다보니 굉장히 속도에 제한사항이 있었고, 때문에 java가 욕을 많이 먹었음.
 - GC가 있는 언어 : Managed 언어 / 없는 언어 : Unmnaged 언어
+
+### slice vs linkedlist
+- add
+  - slice 는 capacity 가 넘친다는 가정하에 데이터를 추가할 경우 O(N)
+  - linkedList는 O(1)
+- remove
+  - slice : 맨앞/맨끝일경우 O(1), 중간일경우 O(N)
+    - 맨앞인 경우는 시작점pointer만 바꿔주면되기때문에 O(1)이다
+  - linkedlist : doubleLinkedList 인 경우 O(1), single은 O(N)
+- randomAccess(내부 구성요소 찾기)
+  - slice : O(1) / index 를 직접 기입해서 접근하면 되기때문
+  - linkedList : O(N)
+- 배열(slice)는 연속된 메모리, linkedList 는 산재된 메모리
+  - cpu가 캐시에 데이터를 가져갈때 배열은 매우 유리함
+  - linkedList 는 '캐시미스' 가 계속 날 확률이 높음
